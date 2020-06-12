@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="style.css">
+    <script>
+        
+
+        function getSuccessOutput() {
+            $.ajax({
+                url:'https://run.mocky.io/v3/da71726d-1bfc-43d3-813c-475d2e6fcbdb',
+                complete: function (response) {
+                    $('#output').html(response.responseText);
+                },
+                error: function () {
+                    $('#output').html('Bummer: there was an error!');
+                },
+            });
+            return false;
+        }
+
+        function getSuccessOutputDash() {
+            $.ajax({
+                url:'https://run.mocky.io/v3/0f8a7bae-e7d4-466b-8729-d556ec51ffa1',
+                complete: function (response) {
+                    $('#dashput').html(response.responseText);
+                     },
+                error: function () {
+                    $('#dashput').html('Bummer: there was an error!');
+                },
+            });
+            return false;
+        }
+        // handles the click event, sends the query
+        function getFailOutput() {
+            $.ajax({
+                url:'myAjax.php',
+                success: function (response) {
+                    console.log(data, response);
+                    $('#output').html(response);
+                },
+                error: function () {
+                    $('#output').html('Bummer: there was an error! We can show error component Wise too');
+                },
+            });
+            return false;
+        }
+              function getFailOutputDash() {
+            $.ajax({
+                url:'myAjax.php',
+                success: function (response) {
+                    console.log(data, response);
+                    $('#dashput').html(response);
+                    $("#dashput").css("margin-top", "50% !important");
+                },
+                error: function () {
+                    $('#dashput').html('Bummer: there was an error! We can show error component Wise too');
+                },
+            });
+            return false;
+        }
+
+        function getStyleOutput() {
+        var r= $('<input class="buttonDynamic" type="button" id="Parent" value="Can u control Child"/>');
+        $("#output").append(r)
+
+        document.getElementById("Parent").addEventListener("click", function(){
+          var r= $('<input class="buttonDynamic" type="button" id="Child" value="We can control Child Click me i can can control Parent "/>');
+          $("#dashput").append(r)
+          
+        });
+
+        document.getElementById("dashput").addEventListener("click", function(){
+          var r= $('<input class="buttonDynamic" id="Child" value="We can control parent "/>');
+          $("#output").css("background-color", "gray");
+          $("#container").css("background-color", "black");
+          $("#output").append(r)
+        });
+
+        }
+
+         function getStyleOutputDash() {
+        $("#dashput").css("background-color", "green");
+
+        }
+
+     
+    </script>
+
+</head>
+<body>
+    <ul id="ulEmployees"></ul>
+    <a  class="button" href="#" onclick="return getSuccessOutput();"> Basic information </a> | <a href="#" onclick="return getFailOutput(); return false;"> Clear if require </a>
+     
+
+     <a  class="button" href="#" onclick="return getSuccessOutputDash();"> Add Child when required </a> | <a href="#" onclick="return getFailOutputDash(); return false;"> Clear the screen</a>
+     <a class="button" href="#" onclick="return getStyleOutput();"> add button to control child </a> 
+    
+<div id="output">waiting for action</div>
+
+</body>
+<div id="dashput" style="margin-top: 30%;  background-color: aliceblue;">waiting for action</div>
+</html>
